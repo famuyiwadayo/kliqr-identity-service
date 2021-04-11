@@ -10,7 +10,7 @@ const handleError = (err: any, req: any, res: any, _: any) => {
   // set locals, only providing error in development
   const error: any = {};
   error.message = err.message;
-
+  // error.error = req.app.get("env") === "development" ? err : {};
   error.statusCode = err.statusCode ? err.statusCode : 500;
 
   const url = req.protocol + "://" + req.get("host") + req.originalUrl;

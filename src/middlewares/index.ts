@@ -1,7 +1,6 @@
 import consola from "consola";
 import { NextFunction, Request, Response } from "express";
 export { catchRequest, handleError } from "./catchInvalidRequests";
-export { authGuard } from "./guards";
 export { default as compressor } from "./compression";
 export { upload } from "./multer";
 

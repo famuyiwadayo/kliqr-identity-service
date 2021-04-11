@@ -10,7 +10,9 @@ export const upload = multer({
       const fileParts = file.originalname.split(".");
       const fileExtension = "." + fileParts[fileParts.length - 1];
       file.extension = fileExtension;
-      callback(null, file.filename);
+      const name = `${Math.floor(Math.random() * 100000)}-${file.originalname}`;
+      // console.log(name);
+      callback(null, name);
     },
   }),
 });

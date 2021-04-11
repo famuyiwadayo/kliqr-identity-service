@@ -34,4 +34,17 @@ export default class UserController {
       sendError(error, next);
     }
   }
+
+  async batchCreateUsersFromCsv(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const result = await service.batchCreateUsersFromCsv(req.file);
+      sendResponse(res, 201, result);
+    } catch (error) {
+      sendError(error, next);
+    }
+  }
 }
