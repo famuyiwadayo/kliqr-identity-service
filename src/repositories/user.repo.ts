@@ -1,6 +1,10 @@
 import { createUserDto } from "../interfaces/dtos/user.dto";
 import { UserRo } from "../interfaces/ros/user.ro";
-import { createUserSql } from "../db/queries/user.query";
+import {
+  createUserSql,
+  getUserByIdSql,
+  getUsersSql,
+} from "../db/queries/user.query";
 import { query } from "../db/db";
 
 export default class UserRepository {
@@ -25,9 +29,19 @@ export default class UserRepository {
   }
 
   async batchCreateUser(data: createUserDto[]): Promise<UserRo[]> {
-    const toRun: any[] = [];
-    data.forEach((input) => toRun.push(this.createUser(input)));
-    const result = (await Promise.all(toRun)) as UserRo[];
+    const toRunInParallel: any[] = [];
+    data.forEach((input) => toRunInParallel.push(this.createUser(input)));
+    const result = (await Promise.all(toRunInParallel)) as UserRo[];
     return result;
+  }
+
+  async getUsers(): Promise<UserRo[]> {
+    const result = await query(getUsersSql);
+    return result.rows;
+  }
+
+  async getUserById(id: string): Promise<UserRo> {
+    const result = await query(getUserByIdSql, [id]);
+    return result.rows[0];
   }
 }
