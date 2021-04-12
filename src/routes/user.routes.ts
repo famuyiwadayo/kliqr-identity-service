@@ -12,6 +12,8 @@ router.post(
   upload.single("file"),
   controller.batchCreateUsersFromCsv
 );
+
 router.get("/", controller.getUsers);
+router.get("/:id", controller.getUserById);
 
 export default router;

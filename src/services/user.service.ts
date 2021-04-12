@@ -17,4 +17,12 @@ export default class UserService {
     const data = await getCsvData(file);
     return await this.repo.batchCreateUser(data);
   }
+
+  async getUsers() {
+    return await this.repo.getUsers();
+  }
+
+  async getUserById(id: string) {
+    return await this.repo.getUserById(id);
+  }
 }

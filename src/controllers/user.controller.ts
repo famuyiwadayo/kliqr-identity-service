@@ -7,8 +7,16 @@ const service = new UserService();
 export default class UserController {
   async getUsers(req: Request, res: Response, next: NextFunction) {
     try {
-      const sql = `SELECT * FROM users`;
-      const result = (await query(sql)).rows;
+      const result = await service.getUsers();
+      sendResponse(res, 200, result);
+    } catch (error) {
+      sendError(error, next);
+    }
+  }
+
+  async getUserById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await service.getUserById(req.params.id);
       sendResponse(res, 200, result);
     } catch (error) {
       sendError(error, next);
