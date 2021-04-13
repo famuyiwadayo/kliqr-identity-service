@@ -16,6 +16,7 @@ export default class UserController {
   async getUserById(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await service.getUserById(req.params.id);
+      console.log("\nRESULT", result, "\n");
       sendResponse(res, 200, result ?? {});
     } catch (error) {
       sendError(error, next);

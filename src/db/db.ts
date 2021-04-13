@@ -1,6 +1,8 @@
 import { Pool } from "pg";
 import { config } from "../config/config";
 
+console.log("\nDATABASE URL", config.DB_URI, "\n");
+
 interface ICustomQuery {
   command: string;
   rowCount: string | number;
