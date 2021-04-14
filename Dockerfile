@@ -1,5 +1,7 @@
 FROM node:14.16.1-alpine3.10
 
+LABEL AUTHOR github.com/famuyiwadayo
+
 RUN mkdir -p /app/node_modules && chown -R node:node /app
 
 WORKDIR /app 

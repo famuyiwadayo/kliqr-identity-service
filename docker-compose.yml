@@ -15,19 +15,20 @@ services:
       - postgres-db:/var/lib/postgresql/data
 
   kliqr-user:
-    build:
-      context: .
+    image: famuyiwa/kliqr-user:v1
+    restart: always
     environment:
       DB_URI: postgres://postgres:postgres@postgres:5432/kliqr_users
       PORT: 3219
       NAME: identity
       VERSION: 1.0.0
-      SERVICE_REGISTRY_URI: http://127.0.0.1:3222/v1/registry
+      SERVICE_REGISTRY_URI: http://kliqr-service-registry:3222/v1/registry
     depends_on:
       - postgres
     links:
       - postgres
     ports:
       - "3219:3219"
+
 volumes:
   postgres-db:
