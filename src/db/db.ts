@@ -1,5 +1,8 @@
 import { Pool } from "pg";
 import { config } from "../config/config";
+import "dotenv/config";
+
+console.log("\nDATABASE URL", config.DB_URI, "\n");
 
 interface ICustomQuery {
   command: string;
@@ -11,6 +14,12 @@ interface ICustomQuery {
 
 const pool = new Pool({
   connectionString: config.DB_URI,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? {
+          rejectUnauthorized: false,
+        }
+      : false,
 });
 
 // a generic query, that executes all queries you send to it

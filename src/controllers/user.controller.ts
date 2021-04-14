@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import { query } from "../db/db";
 import UserService from "../services/user.service";
 import { sendError, sendResponse } from "../utils";
 
@@ -17,7 +16,8 @@ export default class UserController {
   async getUserById(req: Request, res: Response, next: NextFunction) {
     try {
       const result = await service.getUserById(req.params.id);
-      sendResponse(res, 200, result);
+      console.log("\nRESULT", result, "\n");
+      sendResponse(res, 200, result ?? {});
     } catch (error) {
       sendError(error, next);
     }

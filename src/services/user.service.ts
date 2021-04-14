@@ -1,6 +1,6 @@
 import { createUserDto } from "../interfaces/dtos/user.dto";
 import UserRepository from "../repositories/user.repo";
-import { getCsvData } from "../utils/getCsvData";
+import { getCsvData, createError } from "../utils";
 
 export default class UserService {
   repo = new UserRepository();
@@ -23,6 +23,8 @@ export default class UserService {
   }
 
   async getUserById(id: string) {
-    return await this.repo.getUserById(id);
+    const result = await this.repo.getUserById(id);
+    if (!result) throw createError("User not found", 404);
+    return result;
   }
 }
